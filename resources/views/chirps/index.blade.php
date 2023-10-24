@@ -54,8 +54,9 @@
                             </div>
                             <p class="mt-4 text-lg text-gray-900 dark:text-gray-100">{{ $chirp->message }}</p>
                         </div>
-                        {{-- @if (auth()->user()->id === $chirp->user_id) --}}
-                        @if (auth()->user()->is($chirp->user))
+                        {{-- @if (auth()->user()->id === $chirp->user_id) --}}{{-- @endif --}}
+                        {{-- @if (auth()->user()->is($chirp->user)) --}}{{-- @endif --}}
+                        @can('update', $chirp)
                             <x-dropdown>
                                 <x-slot name="trigger">
                                     <button>
@@ -68,9 +69,15 @@
                                     <x-dropdown-link :href="route('chirps.edit', $chirp)">
                                         {{ __('Edit Chirp') }}
                                     </x-dropdown-link>
+                                    <form method="POST" action="{{ route('chirps.destroy', $chirp)}}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                        @csrf @method('DELETE')
+                                        <x-dropdown-link :href="route('chirps.destroy', $chirp)">
+                                            {{ __('Delete Chirp') }}
+                                        </x-dropdown-link>
+                                    </form>
                                 </x-slot>
                             </x-dropdown>
-                        @endif
+                        @endcan
 
                     </div>
                 @endforeach

@@ -16,7 +16,7 @@ class ChirpController extends Controller
     {
         return view('chirps.index', [
             // 'chirps' => Chirp::orderBy('created_at', 'desc')->get()
-            'chirps' => Chirp::latest()->get()
+            'chirps' => Chirp::with('user')->latest()->get()
         ]);
     }
 

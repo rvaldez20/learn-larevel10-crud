@@ -38,7 +38,7 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <span class="text-gray-800 dark:text-gray-200">
-                                        USER_NAME
+                                        {{ $chirp->user->name }}
                                     </span>
                                     {{-- {{ $chirp->created_at->diffForHumans() }} --}}
                                     <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $chirp->created_at->format('j M Y, g:i a') }}T</small>
